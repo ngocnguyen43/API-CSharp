@@ -57,7 +57,11 @@ namespace WebApi2.Services
                 Console.WriteLine(ex.ToString());
                 throw new UnexpectedException();
             }
+            UserLoginDto userLoginDto = new UserLoginDto();
+            userLoginDto.Email = user.Email;
+            userLoginDto.Password = user.Password;
             Meta meta = new Meta.Builder("OK").WithStatusCode(201).Build();
+
             return new Response.Builder(meta).Build();
         }
     }

@@ -33,20 +33,20 @@ namespace WebApi2.Controllers
         [HttpPost]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(typeof(Meta), 200)]
-        public ActionResult<Response> AddUser([FromBody][Required]UserDto userDto)
+        public ActionResult<Response> AddUser([FromBody]UserDto userDto)
         {
             return ErrorHandler.Handle(Response, () => _userService.AddUser(userDto));
         }
         [HttpPatch]
         [ProducesResponseType(typeof(Meta), 200)]
-        public ActionResult<Response> UpdateUser([FromBody][Required] UserDto userDto)
+        public ActionResult<Response> UpdateUser([FromBody] UserDto userDto)
         {
             return ErrorHandler.Handle(Response, () => _userService.UpdateUser(userDto));
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(typeof(Meta), 200)]
-        public ActionResult<Response> DeleteUser([FromQuery][Required]string id)
+        public ActionResult<Response> DeleteUser(string id)
         {
             return ErrorHandler.Handle(Response, () => _userService.DeleteUserById(id));
         }

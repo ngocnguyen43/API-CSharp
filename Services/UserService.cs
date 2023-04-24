@@ -24,6 +24,7 @@ namespace WebApi2.Services
             User user = _mapper.Map<User>(userDto);
             user.Id =  Guid.NewGuid().ToString();
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            user.Role = "user";
             var isExisted = _context.Users.Any(u => u.Email == user.Email);
             if (isExisted)
             {
@@ -71,10 +72,10 @@ namespace WebApi2.Services
             {
                 result = _context.Users.Select(x =>new 
                 {
-                    role=x.Role,
-                    fullname=x.Fullname,
-                    email=x.Email,
-                    id= x.Id
+                    Role=x.Role,
+                    FullName = x.Fullname,
+                    Email=x.Email,
+                    Id= x.Id
                     
                 }).ToList();
             }
@@ -107,14 +108,15 @@ namespace WebApi2.Services
 
         public Response UpdateUser(UserDto userDto)
         {
-            var user = _context.Users.Where(u => u.Id == userDto.Id).FirstOrDefault();
-            if (user == null)
+            User user = _mapper.Map<User>(userDto);
+            var isExist = _context.Users.Any(u => u.Id == userDto.Id);
+            if (!isExist)
             {
                 throw new NotFoundException("user Not Found");
             }
             if (user.Password != null)
             {
-                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
             }
             try
             {

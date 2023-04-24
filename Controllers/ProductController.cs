@@ -42,10 +42,10 @@ namespace WebApi2.Controllers
         {
             return ErrorHandler.Handle(Response, () => _productService.Update(productDto));
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(typeof(Meta), 200)]
-        public ActionResult<Response> DeleteById([FromBody] string id)
+        public ActionResult<Response> DeleteById( string id)
         {
             return ErrorHandler.Handle(Response, () => _productService.DeleteById(id));
         }

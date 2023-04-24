@@ -93,6 +93,7 @@ namespace WebApi2.Services
             try
             {
                 order = _appDbContext.Orders
+                   .Where(z=>z.Id == id)
                    .Include(o => o.OrderProducts)
                    .ThenInclude(op => op.Product)
                    .Select(o => new
