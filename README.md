@@ -14,4 +14,5 @@
 1. Clone this repo 
 2. Set up file ```appsettings.json``` base on ```appsettings.json.example```
 3. Use Visual Studio to re-build this project
+3. Create Migrate ```Add-Migrate V1``` and update database ```Database-Update```
 4. Enjoy 🎉🎉🎉
