@@ -13,8 +13,5 @@
 ## Instructions
 1. Clone this repo 
 2. Set up file ```appsettings.json``` base on ```appsettings.json.example```
-	##
-	cp appsettings.json.example appsettings.json 
-
 3. Use Visual Studio to re-build this project
 4. Enjoy 🎉🎉🎉
